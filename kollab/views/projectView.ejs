@@ -1,0 +1,18 @@
+<%- include('./partials/header'); -%>
+
+<div class="container-fluid">
+  <h1> <%= projects[id].title %> </h1>
+  <p> <%= projects[id].description %> </p>
+  <p> Owned by: <%= projects[id].owner %> </p>
+  <div class="userList">
+    <h2> People on this project: </h2>
+    <% projects[id].users.forEach(function(uID) { %>
+      <p> <%= users[uID].name%> </p>
+    <% }) %>
+  </div>
+  <form action="/mainPage/<%= id %>/join" method="POST">
+    <button type="Submit" value="Join Group" color="yellow" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<%- include('./partials/footer'); -%>
