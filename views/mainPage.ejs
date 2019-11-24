@@ -1,0 +1,35 @@
+<%- include('./partials/header'); -%>
+<body>
+  <!-- SIGNED IN PROJECTS PAGE -->
+    
+<div class="container-fluid">
+    <% if(search =="" || search==" "){ %>
+      <% projects.forEach(function(project) { %>
+        <div class="card mt-3">
+            <h5 class="card-header"><%= project.title %></h5>
+            <div class="card-body">
+                <h5 class="card-title">Owner: <%= project.owner %></h5>
+                <p class="card-text">Description: <%= project.description %></p>
+                <a href="/mainPage/<%= project.id.toString() %>" class="btn btn-primary">See project <%= project.id.toString() %></a>
+            </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <% projects.forEach(function(project) { %>
+        <% if(project.title.toUpperCase().includes(search.toUpperCase()) || project.description.toUpperCase().includes(search.toUpperCase()) || project.owner.toUpperCase().includes(search.toUpperCase())) { %>
+          <div class="card mt-3">
+              <h5 class="card-header"><%= project.title %></h5>
+              <div class="card-body">
+                  <h5 class="card-title">Owner: <%= project.owner %></h5>
+                  <p class="card-text">Description: <%= project.description %></p>
+                  <a href="/mainPage/<%= project.id.toString() %>" class="btn btn-primary">See project <%= project.id.toString() %></a>
+              </div>
+          </div>
+          
+        <% }; %>
+      <% }); %>
+    <% } %>
+  </div>
+</body>
+
+<%- include('./partials/footer'); -%>
