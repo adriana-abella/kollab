@@ -1,0 +1,34 @@
+<%- include('./partials/header'); -%>
+
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+    <h1 class="display-4"> <%= project.title %> </h1>
+    <p class="lead"> <%= project.description %> </p>
+    </div>
+  </div>
+  <div class="container-fluid">
+  <p> Owned by: <%= project.owner %> </p>
+  <div class="userList">
+    <h2> People on this project: </h2>
+    <% project.users.forEach(function(uID) { %>
+      <p> <%= users[uID].name%> </p>
+    <% }) %>
+  </div>
+  <div class="messageList">
+    <h2> Messages: </h2>
+    <% project.messages.forEach(function(message) { %>
+      <p> <%= message.text %> sent by: <%= message.name %> on <%= message.date %></p>
+    <% }) %>
+
+    <form action="/mainPage/<%= id %>/message" method="POST">
+        <div class="form-group">
+          <input type="textarea" class="form-control" placeholder="Enter comment" name="message" required>
+          <small id="emailHelp" class="form-text text-muted">Submit your message to the group chat.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  </div>
+</div>
+
+    <%- include('./partials/footer'); -%>
