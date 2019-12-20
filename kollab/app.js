@@ -1,14 +1,56 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+var sessions = require("express-session");
+const flash = require("connect-flash");
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var mainRouter = require('./routes/mainPage');
+//var profileRouter = require('./routes/profiles');
 
 var app = express();
+
+app.use(bodyParser.json());
+
+app.set('trust proxy', 1);
+app.use(sessions({
+  name: 'sid',
+  secret: 'topsecret',
+  resave: false,
+  
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 86400000,
+    sameSite: true,
+    secure: false
+  }
+}));
+
+mongoose.connect('mongodb://localhost/kollabdb');
+let db = mongoose.connection;
+
+//Check connection
+db.once('open', function(){
+  console.log('Connected to MongoDB');
+});
+
+db.on('error', function(err){
+  console.log(err);
+});
+
+// conncect to mongodb
+//mongoose.connect('mongodb://localhost/kollabdb');
+//mongoose.Promise = global.Promise;
+
+//app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +70,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/mainPage', mainRouter);
+//app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,6 +88,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
 

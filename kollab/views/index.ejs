@@ -14,10 +14,35 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#works">How It Works</a></li>
+                <button id="mySignUp" class="sign-up-btn">Sign Up</button>
+                <script type="text/javascript">
+                    document.getElementById("mySignUp").onclick = function () {
+                        location.href = "/users/register";
+                    };
+                </script>
+                <button id="myLogIn" class="log-in-btn">Log In</button>
+                <script type="text/javascript">
+                    document.getElementById("myLogIn").onclick = function () {
+                        location.href = "/users/login";
+                    };
+                </script>
               </ul>
             </nav>
         <section id="home">
           <div class="move-left" style="height: 250px; width: 405px; background: url(/images/KollabPNG.png);"></div>
+
+          <div class="sign-up-form sequence fadeInBottom">
+            <form form method="post" action="/users/register">
+              <input type="name" class="input-box" placeholder="Name" name = "name" required>
+              <input type="username" class="input-box" placeholder="Username" name="username"required>
+              <input type="email" class="input-box" placeholder="Email" name="email" required>
+              <input type="password" class="input-box" placeholder="Password" name="password" required>
+              <p id = "notice">Make sure your password is at least 8 characters including a number and an upper case letter.</p>
+              <button type = "submit" class="signup-btn">Sign Up For Kollab</button>
+              <p id = "agreement">By clicking “Sign Up For Kollab”, you agree to our <a href="#">Terms of Service</a>.</p>
+            </form>
+          </div>
+
         </section>
         <section id="about">
             <h1>About</h1>
@@ -25,16 +50,14 @@
         </section>
         <section id="works">
             <h1>How It Works</h1>
-            <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi, quis!</p>
-        </section>
-        <section id="contact">
-            <h1>Contact</h1>
-            <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi, quis!</p>
+            <p class="lead">Join: Browse through a list of projects or search for an ideal project you would like to join,Once you have found a project click on send a join request to the creator of the project,Check back on your notifications to see if your requests was accepted, Once it is accepted you will be added to the projects chatroom.
+                Create: To create a project, add a short description and a title of your project and what you’re looking for in your project, Once you click submit you will be able to start accepting requests, Upon acceptance that person will be added to your project chatroom.
+                </p>
         </section>
       </div>
       
       <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src = "/javascripts/main.js"></script>
+      <script src = "/javascripts/main.js"></script>
   
 </body>
 </html>
